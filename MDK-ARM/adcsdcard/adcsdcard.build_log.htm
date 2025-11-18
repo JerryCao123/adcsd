@@ -21,28 +21,32 @@ Target DLL:      Segger\JL2CM3.dll V2.99.40.0
 Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
-C:\Users\DELL\Desktop\Sample\adcsd\MDK-ARM\adcsdcard.uvprojx
-Project File Date:  10/17/2025
+C:\Users\DELL\Desktop\adcsd1\MDK-ARM\adcsdcard.uvprojx
+Project File Date:  11/04/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'adcsdcard'
 compiling main.c...
-../Core/Src/main.c(107): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+../Core/Src/main.c(132): warning:  #1035-D: single-precision operand implicitly converted to double-precision
       return 10.0 + (float)(rand() % 60) / 10.0;  // 10.0~15.9
-../Core/Src/main.c(153): warning:  #167-D: argument of type "uint32_t *" is incompatible with parameter of type "DWORD *"
+../Core/Src/main.c(178): warning:  #167-D: argument of type "uint32_t *" is incompatible with parameter of type "DWORD *"
       res = f_getfree("0:", &free1, &fs_ptr);										//getSD空余空间
-../Core/Src/main.c(170): warning:  #1295-D: Deprecated declaration WriteToSD - give arg types
-  void WriteToSD();
-../Core/Src/main.c(208): warning:  #167-D: argument of type "volatile uint16_t *" is incompatible with parameter of type "uint16_t *"
+../Core/Src/main.c(240): warning:  #167-D: argument of type "volatile uint16_t *" is incompatible with parameter of type "uint16_t *"
   										ProcessBuffer(ADC_BUFA, BufA_start_us);     //1.68ms
-../Core/Src/main.c(214): warning:  #167-D: argument of type "volatile uint16_t *" is incompatible with parameter of type "uint16_t *"
+../Core/Src/main.c(248): warning:  #167-D: argument of type "volatile uint16_t *" is incompatible with parameter of type "uint16_t *"
   										ProcessBuffer(ADC_BUFB, BufB_start_us);
-../Core/Src/main.c: 5 warnings, 0 errors
+../Core/Src/main.c(419): warning:  #177-D: variable "fno"  was declared but never referenced
+  	FILINFO fno;  // 文件信息结构体（用于判断文件是否存在）
+../Core/Src/main.c(427): warning:  #550-D: variable "write_len"  was set but never used
+  	uint16_t write_len;
+../Core/Src/main.c(98): warning:  #177-D: variable "sd_write_count"  was declared but never referenced
+  static uint32_t sd_write_count = 0;
+../Core/Src/main.c: 7 warnings, 0 errors
 linking...
-Program Size: Code=31970 RO-data=546 RW-data=136 ZI-data=8152  
+Program Size: Code=32502 RO-data=546 RW-data=156 ZI-data=10644  
 FromELF: creating hex file...
-"adcsdcard\adcsdcard.axf" - 0 Error(s), 5 Warning(s).
+"adcsdcard\adcsdcard.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
 
