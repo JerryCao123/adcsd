@@ -33,18 +33,18 @@ compiling main.c...
 ../Core/Src/main.c(178): warning:  #167-D: argument of type "uint32_t *" is incompatible with parameter of type "DWORD *"
       res = f_getfree("0:", &free1, &fs_ptr);										//getSD空余空间
 ../Core/Src/main.c(240): warning:  #167-D: argument of type "volatile uint16_t *" is incompatible with parameter of type "uint16_t *"
-  										ProcessBuffer(ADC_BUFA, BufA_start_us);     //1.68ms
+  										ProcessBuffer(ADC_BUFA, BufA_start_us);     //900us
 ../Core/Src/main.c(248): warning:  #167-D: argument of type "volatile uint16_t *" is incompatible with parameter of type "uint16_t *"
   										ProcessBuffer(ADC_BUFB, BufB_start_us);
-../Core/Src/main.c(419): warning:  #177-D: variable "fno"  was declared but never referenced
+../Core/Src/main.c(427): warning:  #177-D: variable "fno"  was declared but never referenced
   	FILINFO fno;  // 文件信息结构体（用于判断文件是否存在）
-../Core/Src/main.c(427): warning:  #550-D: variable "write_len"  was set but never used
+../Core/Src/main.c(435): warning:  #550-D: variable "write_len"  was set but never used
   	uint16_t write_len;
 ../Core/Src/main.c(98): warning:  #177-D: variable "sd_write_count"  was declared but never referenced
   static uint32_t sd_write_count = 0;
 ../Core/Src/main.c: 7 warnings, 0 errors
 linking...
-Program Size: Code=32502 RO-data=546 RW-data=156 ZI-data=10644  
+Program Size: Code=32506 RO-data=546 RW-data=156 ZI-data=10644  
 FromELF: creating hex file...
 "adcsdcard\adcsdcard.axf" - 0 Error(s), 7 Warning(s).
 
@@ -69,7 +69,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.5.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

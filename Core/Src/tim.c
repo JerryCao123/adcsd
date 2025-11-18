@@ -23,7 +23,7 @@
 
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
-
+TIM_HandleTypeDef htim4;
 void MX_TIM2_Init(void)
 {
 
@@ -33,7 +33,7 @@ void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 20;     //84Mhz/（83+1）=1Mhz    后面可以试试2MHz
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 7;
+  htim2.Init.Period = 3;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;     //动态修改ARR值，在这里按照1us固定触发，所以不需要动态修改
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -87,7 +87,33 @@ void MX_TIM3_Init(void) {
    HAL_NVIC_SetPriority(TIM3_IRQn, 2, 0);
    HAL_NVIC_EnableIRQ(TIM3_IRQn);
 }
+// 1. 定时器初始化（TIM4，100ms中断一次）
+void MX_TIM4_Init(void) {
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
 
+  htim4.Instance = TIM4;
+  htim4.Init.Prescaler = 8399;               // 84MHz主频→1MHz计数（84-1=83）
+  htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim4.Init.Period = 999;               // 1MHz×100ms=100000计数（100000-1=99999）
+  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim4) != HAL_OK) {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim4, &sClockSourceConfig) != HAL_OK) {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK) {
+    Error_Handler();
+  }
+	  // TIM4中断优先级：抢占优先级3，子优先级0（低于ADC+DMA）
+   HAL_NVIC_SetPriority(TIM4_IRQn, 3, 0);
+   HAL_NVIC_EnableIRQ(TIM4_IRQn);
+}
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
 {
 
@@ -100,6 +126,9 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
   }
 	if(tim_baseHandle->Instance==TIM3) {
     __HAL_RCC_TIM3_CLK_ENABLE();  // 使能TIM3时钟
+  }
+	if(tim_baseHandle->Instance==TIM4) {
+    __HAL_RCC_TIM4_CLK_ENABLE();  // 使能TIM4时钟
   }
 }
 

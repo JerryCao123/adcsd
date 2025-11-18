@@ -37,7 +37,7 @@ uint8_t SD_Error;
   hsd.Init.ClockPowerSave = SDIO_CLOCK_POWER_SAVE_DISABLE;
   hsd.Init.BusWide = SDIO_BUS_WIDE_1B;
   hsd.Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
-  hsd.Init.ClockDiv = 15;				//1    48/(15+1)=3M
+  hsd.Init.ClockDiv = 23;				//1    48/(15+1)=3M
   /* USER CODE BEGIN SDIO_Init 2 */
 	// 1. 初始化SD卡（SDIO接口专用）
 	if(HAL_SD_Init(&hsd)!=HAL_OK){
